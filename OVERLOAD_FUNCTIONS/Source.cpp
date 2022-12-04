@@ -102,6 +102,7 @@ int search(char arr[ROWS][COLS], const int ROWS, const int COlS);
 //#define INT_MATRIX
 //#define FLOAT_MATRIX
 //#define DOUBLE_MATRIX
+//#define CHAR_MATRIX
 
 int main() {
 	srand(time(NULL));
@@ -189,7 +190,8 @@ int main() {
 	cout << "------------------------------------------------------------|MATRIX INT|------------------------------------------------------------------------------" << endl;
 	int arr[ROWS][COLS];
 	int limit; cout << "Enter limit for unique_random: "; cin >> limit;
-	string w; int k; cout << "Enter where You want move array(w or l): "; cin >> w; cout << "Enter k: "; cin >> k;
+	string w;
+	int k; cout << "Enter on how many move array: "; cin >> k;
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLS; j++)
 			arr[i][j] = rand() % (limit + 1);
@@ -202,7 +204,7 @@ int main() {
 	cout << "Count of repitions = " << counter << endl;
 	cout << "UniqueRandom:\n"; unique_random(arr, ROWS, COLS, limit); cout << endl;
 	cout << "SortedArray:\n"; sort(arr, ROWS, COLS); cout << endl;
-	//cout << "Shift:         ";  shift(arr, n, k, w); cout << endl;
+	cout << "Shift:         ";  shift(arr, ROWS, COLS, k, w); cout << endl;
 	cout << "FillRand:     \n";  FillRand(arr, ROWS, COLS, limit); cout << endl;
 #endif //INT_MATRIX
 
@@ -253,6 +255,7 @@ int main() {
 	cout << "FillRand:     \n";  FillRand(arr, ROWS, COLS, limit); cout << endl;
 #endif //DOUBLE_MATRIX
 
+#ifdef CHAR_MATRIX
 	cout << "------------------------------------------------------------|MATRIX CHAR|-----------------------------------------------------------------------------" << endl;
 	char arr[ROWS][COLS];
 	int limit; cout << "Enter limit for unique_random: "; cin >> limit;
@@ -271,6 +274,8 @@ int main() {
 	cout << "SortedArray:\n"; sort(arr, ROWS, COLS); cout << endl;
 	//cout << "Shift:         ";  shift(arr, n, k, w); cout << endl;
 	cout << "FillRand:     \n";  FillRand(arr, ROWS, COLS, limit); cout << endl;
+
+#endif //CHAR_MATRIX
 }
 
 //intenger-realisation
@@ -809,13 +814,19 @@ int unique_random(int arr[ROWS][COLS], const int ROWS, const int COLS, int prede
 	return 0;
 }
 
-void shift(int arr[ROWS][COLS], const int ROWS, const int COLS, int k) {
+void shift(int arr[ROWS][COLS], const int ROWS, const int COLS, int k, string w) {
 	int temp;
-	for (int i = 0; i < ROWS; i++) {
-		for (int j = 0; j < COLS; j++) {
-
+	for (int i = 0; i < k; i++) {
+		temp = arr[0][0];
+		for (int j = 0; j < ROWS; j++) {
+			for (int a = 0; a < COLS; a++) {
+				arr[j][a] = arr[j][a + 1];
+			}
 		}
+		arr[ROWS - 1][COLS - 1] = temp;
 	}
+	cout << endl;
+	print_array(arr, ROWS, COLS); 
 }
 
 void print_array(int arr[ROWS][COLS], const int ROWS, const int COLS) {
@@ -937,9 +948,20 @@ int unique_random(float arr[ROWS][COLS], const int ROWS, const int COLS, int pre
 	return 0;
 }
 
-/*void shift(int arr[ROWS][COLS], const int ROWS, const int COLS, int k) {
-
-}*/
+void shift(float arr[ROWS][COLS], const int ROWS, const int COLS, int k, string w) {
+	float temp;
+	for (int i = 0; i < k; i++) {
+		temp = arr[0][0];
+		for (int j = 0; j < ROWS; j++) {
+			for (int a = 0; a < COLS; a++) {
+				arr[j][a] = arr[j][a + 1];
+			}
+		}
+		arr[ROWS - 1][COLS - 1] = temp;
+	}
+	cout << endl;
+	print_array(arr, ROWS, COLS);
+}
 
 void print_array(float arr[ROWS][COLS], const int ROWS, const int COLS) {
 	for (int i = 0; i < ROWS; i++) {
@@ -1060,9 +1082,20 @@ int unique_random(double arr[ROWS][COLS], const int ROWS, const int COLS, int pr
 	return 0;
 }
 
-/*void shift(int arr[ROWS][COLS], const int ROWS, const int COLS, int k) {
-
-}*/
+void shift(double arr[ROWS][COLS], const int ROWS, const int COLS, int k, string w) {
+	double temp;
+	for (int i = 0; i < k; i++) {
+		temp = arr[0][0];
+		for (int j = 0; j < ROWS; j++) {
+			for (int a = 0; a < COLS; a++) {
+				arr[j][a] = arr[j][a + 1];
+			}
+		}
+		arr[ROWS - 1][COLS - 1] = temp;
+	}
+	cout << endl;
+	print_array(arr, ROWS, COLS);
+}
 
 void print_array(double arr[ROWS][COLS], const int ROWS, const int COLS) {
 	for (int i = 0; i < ROWS; i++) {
@@ -1186,9 +1219,20 @@ int unique_random(char arr[ROWS][COLS], const int ROWS, const int COLS, int pred
 	return 0;
 }
 
-/*void shift(int arr[ROWS][COLS], const int ROWS, const int COLS, int k) {
-
-}*/
+void shift(char arr[ROWS][COLS], const int ROWS, const int COLS, int k, string w) {
+	char temp;
+	for (int i = 0; i < k; i++) {
+		temp = arr[0][0];
+		for (int j = 0; j < ROWS; j++) {
+			for (int a = 0; a < COLS; a++) {
+				arr[j][a] = arr[j][a + 1];
+			}
+		}
+		arr[ROWS - 1][COLS - 1] = temp;
+	}
+	cout << endl;
+	print_array(arr, ROWS, COLS);
+}
 
 void print_array(char arr[ROWS][COLS], const int ROWS, const int COLS) {
 	for (int i = 0; i < ROWS; i++) {
