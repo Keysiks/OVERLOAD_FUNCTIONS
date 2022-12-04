@@ -3,6 +3,9 @@
 #include <math.h>
 using namespace std;
 
+
+const int ROWS = 10;
+const int COLS = 5;
 //intenger
 long long array_sum(int arr[], int n);
 int min_value(int arr[], int n);
@@ -48,20 +51,57 @@ void FillRand(char arr[], int n, int predel);
 int search(char arr[], int n);
 
 //int_matrix
-long long array_sum(int arr[][], int n, int k);
-int min_value(int arr[][], int n, int k);
-int max_value(int arr[], int n);
-int sort(int arr[], int n);
-int unique_random(int arr[], int n, int predel);
-void shift(int arr[], int n, int k, string w);
-void print_array(int arr[], int n);;
-void FillRand(int arr[], int n, int predel);
-int search(int arr[], int n);
+long long array_sum(int arr[ROWS][COLS], const int ROWS, const int COlS);
+int min_value(int arr[ROWS][COLS], const int ROWS, const int COlS);
+int max_value(int arr[ROWS][COLS], const int ROWS, const int COlS);
+int sort(int arr[ROWS][COLS], const int ROWS, const int COlS);
+int unique_random(int arr[ROWS][COLS], const int ROWS, const int COlS, int predel);
+void shift(int arr[ROWS][COLS], const int ROWS, const int COlS, int k, string w);
+void print_array(int arr[ROWS][COLS], const int ROWS, const int COlS);;
+void FillRand(int arr[ROWS][COLS], const int ROWS, const int COlS, int predel);
+int search(int arr[ROWS][COLS], const int ROWS, const int COlS);
+
+//float_matrix
+double array_sum(float arr[ROWS][COLS], const int ROWS, const int COLS);
+float min_value(float arr[ROWS][COLS], const int ROWS, const int COLS);
+float max_value(float arr[ROWS][COLS], const int ROWS, const int COLS);
+int sort(float arr[ROWS][COLS], const int ROWS, const int COLS);
+int unique_random(float arr[ROWS][COLS], const int ROWS, const int COLS,int predel);
+void shift(float arr[ROWS][COLS], const int ROWS, const int COLS, int k, string w);
+void print_array(float arr[ROWS][COLS], const int ROWS, const int COLS);
+void FillRand(float arr[ROWS][COLS], const int ROWS, const int COLS, int predel);
+int search(float arr[ROWS][COLS], const int ROWS, const int COLS);
+
+//double_matrix
+double array_sum(double arr[ROWS][COLS], const int ROWS, const int COLS);
+double min_value(double arr[ROWS][COLS], const int ROWS, const int COLS);
+double max_value(double arr[ROWS][COLS], const int ROWS, const int COLS);
+int sort(double arr[ROWS][COLS], const int ROWS, const int COLS);
+int unique_random(double arr[ROWS][COLS], const int ROWS, const int COLS, int predel);
+void shift(double arr[ROWS][COLS], const int ROWS, const int COLS, int k, string w);
+void print_array(double arr[ROWS][COLS], const int ROWS, const int COLS);
+void FillRand(double arr[ROWS][COLS], const int ROWS, const int COLS, int predel);
+int search(double arr[ROWS][COLS], const int ROWS, const int COLS);
+
+//char_matrix
+long long array_sum(char arr[ROWS][COLS], const int ROWS, const int COlS);
+int min_value(char arr[ROWS][COLS], const int ROWS, const int COlS);
+int max_value(char arr[ROWS][COLS], const int ROWS, const int COlS);
+int sort(char arr[ROWS][COLS], const int ROWS, const int COlS);
+int unique_random(char arr[ROWS][COLS], const int ROWS, const int COlS, int predel);
+void shift(char arr[ROWS][COLS], const int ROWS, const int COlS, int k, string w);
+void print_array(char arr[ROWS][COLS], const int ROWS, const int COlS);;
+void FillRand(char arr[ROWS][COLS], const int ROWS, const int COlS, int predel);
+int search(char arr[ROWS][COLS], const int ROWS, const int COlS);
+
 
 //#define INT
 //#define FLOAT
 //#define DOUBLE
 //#define CHAR
+//#define INT_MATRIX
+//#define FLOAT_MATRIX
+//#define DOUBLE_MATRIX
 
 int main() {
 	srand(time(NULL));
@@ -144,11 +184,98 @@ int main() {
 	cout << "Shift:         ";  shift(arr, n, k, w); cout << endl;
 	cout << "FillRand:      ";  FillRand(arr, n, limit); cout << endl;
 #endif //CHAR
+
+#ifdef INT_MATRIX
+	cout << "------------------------------------------------------------|MATRIX INT|------------------------------------------------------------------------------" << endl;
+	int arr[ROWS][COLS];
+	int limit; cout << "Enter limit for unique_random: "; cin >> limit;
+	string w; int k; cout << "Enter where You want move array(w or l): "; cin >> w; cout << "Enter k: "; cin >> k;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			arr[i][j] = rand() % (limit + 1);
+	}
+	print_array(arr, ROWS, COLS); cout << endl;
+	cout << "Array_sum = " << array_sum(arr, ROWS, COLS) << endl;
+	cout << "Minimal value = " << min_value(arr, ROWS, COLS) << endl;
+	cout << "Maximum value = " << max_value(arr, ROWS, COLS) << endl;
+	int counter = search(arr, ROWS, COLS);
+	cout << "Count of repitions = " << counter << endl;
+	cout << "UniqueRandom:\n"; unique_random(arr, ROWS, COLS, limit); cout << endl;
+	cout << "SortedArray:\n"; sort(arr, ROWS, COLS); cout << endl;
+	//cout << "Shift:         ";  shift(arr, n, k, w); cout << endl;
+	cout << "FillRand:     \n";  FillRand(arr, ROWS, COLS, limit); cout << endl;
+#endif //INT_MATRIX
+
+#ifdef FLOAT_MATRIX
+	cout << "------------------------------------------------------------|MATRIX FLOAT|----------------------------------------------------------------------------" << endl;
+	float arr[ROWS][COLS];
+	int limit; cout << "Enter limit for unique_random: "; cin >> limit;
+	string w; int k; cout << "Enter where You want move array(w or l): "; cin >> w; cout << "Enter k: "; cin >> k;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) 
+			arr[i][j] = (float)(rand() % (limit + 1)) + (rand() % 10) / 100.0;
+	}
+	print_array(arr, ROWS, COLS); cout << endl;
+	cout << "Array_sum = " << array_sum(arr, ROWS, COLS) << endl;
+	cout << "Minimal value = " << min_value(arr, ROWS, COLS) << endl;
+	cout << "Maximum value = " << max_value(arr, ROWS, COLS) << endl;
+	int counter = search(arr, ROWS, COLS);
+	cout << "Count of repitions = " << counter << endl;
+	cout << "UniqueRandom:\n"; unique_random(arr, ROWS, COLS, limit); cout << endl;
+	cout << "SortedArray:\n"; sort(arr, ROWS, COLS); cout << endl;
+	//cout << "Shift:         ";  shift(arr, n, k, w); cout << endl;
+	cout << "FillRand:     \n";  FillRand(arr, ROWS, COLS, limit); cout << endl;
+#endif //FLOAT_MATRIX
+
+#ifdef DOUBLE_MATRIX
+	cout << "-----------------------------------------------------------|MATRIX DOUBLE|----------------------------------------------------------------------------" << endl;
+	double arr[ROWS][COLS];
+	int limit; cout << "Enter limit for unique_random: "; cin >> limit;
+	string w; int k; cout << "Enter where You want move array(w or l): "; cin >> w; cout << "Enter k: "; cin >> k;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			double random = rand() % limit;
+			for (int k = 0; k < 50; k++)
+				random += (rand() % 10) / pow(10, k);
+			arr[i][j] = random;
+		}	
+
+	}
+	print_array(arr, ROWS, COLS); cout << endl;
+	cout << "Array_sum = " << array_sum(arr, ROWS, COLS) << endl;
+	cout << "Minimal value = " << min_value(arr, ROWS, COLS) << endl;
+	cout << "Maximum value = " << max_value(arr, ROWS, COLS) << endl;
+	int counter = search(arr, ROWS, COLS);
+	cout << "Count of repitions = " << counter << endl;
+	cout << "UniqueRandom:\n"; unique_random(arr, ROWS, COLS, limit); cout << endl;
+	cout << "SortedArray:\n"; sort(arr, ROWS, COLS); cout << endl;
+	//cout << "Shift:         ";  shift(arr, n, k, w); cout << endl;
+	cout << "FillRand:     \n";  FillRand(arr, ROWS, COLS, limit); cout << endl;
+#endif //DOUBLE_MATRIX
+
+	cout << "------------------------------------------------------------|MATRIX CHAR|-----------------------------------------------------------------------------" << endl;
+	char arr[ROWS][COLS];
+	int limit; cout << "Enter limit for unique_random: "; cin >> limit;
+	string w; int k; cout << "Enter where You want move array(w or l): "; cin >> w; cout << "Enter k: "; cin >> k;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			arr[i][j] = rand() % (limit + 1);
+	}
+	print_array(arr, ROWS, COLS); cout << endl;
+	cout << "Array_sum = " << array_sum(arr, ROWS, COLS) << endl;
+	cout << "Minimal value = " << min_value(arr, ROWS, COLS) << endl;
+	cout << "Maximum value = " << max_value(arr, ROWS, COLS) << endl;
+	int counter = search(arr, ROWS, COLS);
+	cout << "Count of repitions = " << counter << endl;
+	cout << "UniqueRandom:\n"; unique_random(arr, ROWS, COLS, limit); cout << endl;
+	cout << "SortedArray:\n"; sort(arr, ROWS, COLS); cout << endl;
+	//cout << "Shift:         ";  shift(arr, n, k, w); cout << endl;
+	cout << "FillRand:     \n";  FillRand(arr, ROWS, COLS, limit); cout << endl;
 }
 
 //intenger-realisation
 long long array_sum(int arr[], int n) {
-	int amount = 0;
+	long long amount = 0;
 	for (int i = 0; i < n; i++)
 		amount += arr[i];
 	return amount;
@@ -180,9 +307,7 @@ int sort(int arr[], int n) {
 			}
 		}
 	}
-	for (int i = 0; i < n; i++) {
-		cout << arr[i] << "\t";
-	}
+	print_array(arr, n);
 	return 0;
 }
 
@@ -203,8 +328,7 @@ int unique_random(int arr[], int n, int predel) {
 			}
 		} while (flag == false);
 	}
-	for (int i = 0; i < n; i++)
-		cout << arr[i] << "\t";
+	print_array(arr, n);
 	return 0;
 }
 
@@ -217,9 +341,7 @@ void shift(int arr[], int n, int k, string w) {
 			new_array[i] = arr[(i + k) % n];
 		else new_array[n - 1] = arr[0];
 	}
-	for (int i = 0; i < n; i++) {
-		cout << new_array[i] << "\t";
-	}
+	print_array(new_array, n);
 	delete[] new_array;
 
 }
@@ -295,9 +417,7 @@ int sort(double arr[], int n) {
 			}
 		}
 	}
-	for (int i = 0; i < n; i++) {
-		cout << arr[i] << "\t";
-	}
+	print_array(arr, n);
 	return 0;
 }
 
@@ -605,4 +725,507 @@ void FillRand(char arr[], int n, int predel) {
 		cout << arr[i] << "\t";
 	}
 	cout << endl << "Char worked;";
+}
+
+
+//int_matrix-realisation
+
+
+long long array_sum(int arr[ROWS][COLS], const int ROWS, const int COLS) {
+	long long amount = 0;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			amount += arr[i][j];
+	}
+	return amount;
+}
+
+int min_value(int arr[ROWS][COLS], const int ROWS, const int COLS) {
+	int minn = INT_MAX;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			if (arr[i][j] < minn) minn = arr[i][j];
+	}
+	return minn;
+}
+
+int max_value(int arr[ROWS][COLS], const int ROWS, const int COLS) {
+	int maxx = INT_MIN;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			if (arr[i][j] > maxx) maxx = arr[i][j];
+	}
+	return maxx;
+}
+
+int sort(int arr[ROWS][COLS], const int ROWS, const int COLS) {
+	int temp; 
+	for (int i = 0; i <ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			for (int a = 0; a < ROWS; a++) {
+				for (int b = 0; b < COLS; b++) {
+					if (arr[a][b] > arr[i][j])
+					{
+						temp = arr[a][b];
+						arr[a][b] = arr[i][j];
+						arr[i][j] = temp;
+					}
+				}
+			}
+		}
+	}
+	print_array(arr, ROWS, COLS);
+	return 0;
+
+}
+
+
+int unique_random(int arr[ROWS][COLS], const int ROWS, const int COLS, int predel) {
+	bool flag;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			flag = true;
+			int random = rand() % predel;
+			for (int k = 0; k < ROWS; k++) {
+				for (int x = 0; x < COLS; x++) {
+					if (random == arr[k][x])
+						flag = false;
+				}
+			}
+			while (flag == false) {
+				flag = true;
+				int random = rand() % predel;
+				for (int k = 0; k < ROWS; k++) {
+					for (int x = 0; x < COLS; x++) {
+						if (random == arr[k][x])
+							flag = false;
+					}
+				}
+			}
+			arr[i][j] = random;
+		}
+	}
+	print_array(arr, ROWS, COLS);
+	return 0;
+}
+
+void shift(int arr[ROWS][COLS], const int ROWS, const int COLS, int k) {
+	int temp;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+
+		}
+	}
+}
+
+void print_array(int arr[ROWS][COLS], const int ROWS, const int COLS) {
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			cout << arr[i][j] << "\t";
+		cout << endl;
+	}
+}
+
+int search(int arr[ROWS][COLS], const int ROWS, const int COLS) {
+	cout << "Repiats: ";
+	int counter = 0;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			for (int k = i + 1; k < ROWS; k++) {
+				for (int x = j + 1; x < COLS; x++) {
+					if (arr[k][x] == arr[i][j]) {
+						counter += 1; 
+						cout << arr[i][j] << "\t";
+					}
+				}
+			}
+		};
+	}
+	cout << endl;
+
+	return counter;
+}
+
+void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS, int predel) {
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			arr[i][j] = rand() % (predel + 1);
+			cout << arr[i][j] << "\t";
+		}
+		cout << endl;
+	}
+	cout << endl; "Int worked;";
+}
+
+//float_matrix
+
+double array_sum(float arr[ROWS][COLS], const int ROWS, const int COLS) {
+	double amount = 0;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			amount += arr[i][j];
+	}
+	return amount;
+}
+
+float min_value(float arr[ROWS][COLS], const int ROWS, const int COLS) {
+	float minn = INT_MAX;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			if (arr[i][j] < minn) minn = arr[i][j];
+	}
+	return minn;
+}
+
+float max_value(float arr[ROWS][COLS], const int ROWS, const int COLS) {
+	float maxx = INT_MIN;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			if (arr[i][j] > maxx) maxx = arr[i][j];
+	}
+	return maxx;
+}
+
+int sort(float arr[ROWS][COLS], const int ROWS, const int COLS) {
+	float temp;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			for (int a = 0; a < ROWS; a++) {
+				for (int b = 0; b < COLS; b++) {
+					if (arr[a][b] > arr[i][j])
+					{
+						temp = arr[a][b];
+						arr[a][b] = arr[i][j];
+						arr[i][j] = temp;
+					}
+				}
+			}
+		}
+	}
+	print_array(arr, ROWS, COLS);
+	return 0;
+
+}
+
+
+int unique_random(float arr[ROWS][COLS], const int ROWS, const int COLS, int predel) {
+	bool flag;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			flag = true;
+			float random = rand() % predel + (rand() % 10) / 100.0;
+			for (int k = 0; k < ROWS; k++) {
+				for (int x = 0; x < COLS; x++) {
+					if (random == arr[k][x])
+						flag = false;
+				}
+			}
+			while (flag == false) {
+				flag = true;
+				float random = rand() % predel + (rand() % 10) / 100.0;
+				for (int k = 0; k < ROWS; k++) {
+					for (int x = 0; x < COLS; x++) {
+						if (random == arr[k][x])
+							flag = false;
+					}
+				}
+			}
+			arr[i][j] = random;
+		}
+	}
+	print_array(arr, ROWS, COLS);
+	return 0;
+}
+
+/*void shift(int arr[ROWS][COLS], const int ROWS, const int COLS, int k) {
+
+}*/
+
+void print_array(float arr[ROWS][COLS], const int ROWS, const int COLS) {
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			cout << arr[i][j] << "\t";
+		cout << endl;
+	}
+}
+
+int search(float arr[ROWS][COLS], const int ROWS, const int COLS) {
+	cout << "Repiats: ";
+	int counter = 0;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			for (int k = i + 1; k < ROWS; k++) {
+				for (int x = j + 1; x < COLS; x++) {
+					if (arr[k][x] == arr[i][j]) {
+						counter += 1;
+						cout << arr[i][j] << "\t";
+					}
+				}
+			}
+		};
+	}
+	cout << endl;
+
+	return counter;
+}
+
+void FillRand(float arr[ROWS][COLS], const int ROWS, const int COLS, int predel) {
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			arr[i][j] = rand() % (predel + 1) + (rand() % 10) / 100.0;
+			cout << arr[i][j] << "\t";
+		}
+		cout << endl;
+	}
+	cout << endl << "Float worked;";
+}
+
+//double_matrix
+
+double array_sum(double arr[ROWS][COLS], const int ROWS, const int COLS) {
+	double amount = 0;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			amount += arr[i][j];
+	}
+	return amount;
+}
+
+double min_value(double arr[ROWS][COLS], const int ROWS, const int COLS) {
+	double minn = INT_MAX;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			if (arr[i][j] < minn) minn = arr[i][j];
+	}
+	return minn;
+}
+
+double max_value(double arr[ROWS][COLS], const int ROWS, const int COLS) {
+	float maxx = INT_MIN;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			if (arr[i][j] > maxx) maxx = arr[i][j];
+	}
+	return maxx;
+}
+
+int sort(double arr[ROWS][COLS], const int ROWS, const int COLS) {
+	double temp;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			for (int a = 0; a < ROWS; a++) {
+				for (int b = 0; b < COLS; b++) {
+					if (arr[a][b] > arr[i][j])
+					{
+						temp = arr[a][b];
+						arr[a][b] = arr[i][j];
+						arr[i][j] = temp;
+					}
+				}
+			}
+		}
+	}
+	print_array(arr, ROWS, COLS);
+	return 0;
+
+}
+
+
+int unique_random(double arr[ROWS][COLS], const int ROWS, const int COLS, int predel) {
+	bool flag;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			flag = true;
+			double random = rand() % predel + (rand() % 10) / 100.0;
+			for (int k = 0; k < ROWS; k++) {
+				for (int x = 0; x < COLS; x++) {
+					if (random == arr[k][x])
+						flag = false;
+				}
+			}
+			while (flag == false) {
+				flag = true;
+				random = rand() % predel + (rand() % 10) / 100.0;
+				for (int k = 0; k < ROWS; k++) {
+					for (int x = 0; x < COLS; x++) {
+						if (random == arr[k][x])
+							flag = false;
+					}
+				}
+			}
+			arr[i][j] = random;
+		}
+	}
+	print_array(arr, ROWS, COLS);
+	return 0;
+}
+
+/*void shift(int arr[ROWS][COLS], const int ROWS, const int COLS, int k) {
+
+}*/
+
+void print_array(double arr[ROWS][COLS], const int ROWS, const int COLS) {
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			cout << arr[i][j] << "\t";
+		cout << endl;
+	}
+}
+
+int search(double arr[ROWS][COLS], const int ROWS, const int COLS) {
+	cout << "Repiats: ";
+	int counter = 0;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			for (int k = i + 1; k < ROWS; k++) {
+				for (int x = j + 1; x < COLS; x++) {
+					if (arr[k][x] == arr[i][j]) {
+						counter += 1;
+						cout << arr[i][j] << "\t";
+					}
+				}
+			}
+		};
+	}
+	cout << endl;
+
+	return counter;
+}
+
+void FillRand(double arr[ROWS][COLS], const int ROWS, const int COLS, int predel) {
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			arr[i][j] = rand() % (predel + 1) + (rand() % 10) / 100.0;
+			cout << arr[i][j] << "\t";
+		}
+		cout << endl;
+	}
+	cout << endl << "Double worked;";
+}
+
+//char_matrix
+
+
+long long array_sum(char arr[ROWS][COLS], const int ROWS, const int COLS) {
+	long long amount = 0;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			amount += (int)arr[i][j];
+	}
+	return amount;
+}
+
+int min_value(char arr[ROWS][COLS], const int ROWS, const int COLS) {
+	int minn = INT_MAX;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			if ((int)arr[i][j] < minn) minn = (int)arr[i][j];
+	}
+	return minn;
+}
+
+int max_value(char arr[ROWS][COLS], const int ROWS, const int COLS) {
+	int maxx = INT_MIN;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			if ((int)arr[i][j] > maxx) maxx = (int)arr[i][j];
+	}
+	return maxx;
+}
+
+int sort(char arr[ROWS][COLS], const int ROWS, const int COLS) {
+	char temp;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			for (int a = 0; a < ROWS; a++) {
+				for (int b = 0; b < COLS; b++) {
+					if ((int)arr[a][b] > (int)arr[i][j])
+					{
+						temp = arr[a][b];
+						arr[a][b] = arr[i][j];
+						arr[i][j] = temp;
+					}
+				}
+			}
+		}
+	}
+	print_array(arr, ROWS, COLS);
+	return 0;
+
+}
+
+
+int unique_random(char arr[ROWS][COLS], const int ROWS, const int COLS, int predel) {
+	bool flag;
+	predel %= 256;
+	if (predel < ROWS * COLS) predel = ROWS * COLS + 1;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			flag = true;
+			int random = rand() % predel;
+			for (int k = 0; k < ROWS; k++) {
+				for (int x = 0; x < COLS; x++) {
+					if (random == (int)arr[k][x])
+						flag = false;
+				}
+			}
+			while (flag == false) {
+				flag = true;
+				int random = rand() % predel;
+				for (int k = 0; k < ROWS; k++) {
+					for (int x = 0; x < COLS; x++) {
+						if (random == (int)arr[k][x])
+							flag = false;
+					}
+				}
+			}
+			arr[i][j] = (char)random;
+		}
+	}
+	print_array(arr, ROWS, COLS);
+	return 0;
+}
+
+/*void shift(int arr[ROWS][COLS], const int ROWS, const int COLS, int k) {
+
+}*/
+
+void print_array(char arr[ROWS][COLS], const int ROWS, const int COLS) {
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++)
+			cout << arr[i][j] << "\t";
+		cout << endl;
+	}
+}
+
+int search(char arr[ROWS][COLS], const int ROWS, const int COLS) {
+	cout << "Repiats: ";
+	int counter = 0;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			for (int k = i + 1; k < ROWS; k++) {
+				for (int x = j + 1; x < COLS; x++) {
+					if (arr[k][x] == arr[i][j]) {
+						counter += 1;
+						cout << arr[i][j] << "\t";
+					}
+				}
+			}
+		};
+	}
+	cout << endl;
+
+	return counter;
+}
+
+void FillRand(char arr[ROWS][COLS], const int ROWS, const int COLS, int predel) {
+	predel %= 256;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			arr[i][j] = (char)(rand() % (predel + 1));
+			cout << arr[i][j] << "\t";
+		}
+		cout << endl;
+	}
+	cout << endl; "Char worked;";
 }
