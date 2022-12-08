@@ -127,7 +127,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CHAR.cpp" />
+    <ClCompile Include="CHAR_MATRIX.cpp" />
+    <ClCompile Include="DOUBLE.cpp" />
+    <ClCompile Include="DOUBLE_MATRIX.cpp" />
+    <ClCompile Include="FLOAT.cpp" />
+    <ClCompile Include="FLOAT_MATRIX.cpp" />
+    <ClCompile Include="INT.cpp" />
+    <ClCompile Include="INT_MATRIX.cpp" />
     <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CHAR.h" />
+    <ClInclude Include="CHAR_MATRIX.h" />
+    <ClInclude Include="Constans.h" />
+    <ClInclude Include="DOUBLE.h" />
+    <ClInclude Include="DOUBLE_MATRIX.h" />
+    <ClInclude Include="FLOAT_MATRIX.h" />
+    <ClInclude Include="INT.h" />
+    <ClInclude Include="FLOAT.h" />
+    <ClInclude Include="INT_MATRIX.h" />
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
